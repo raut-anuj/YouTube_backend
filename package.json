@@ -1,0 +1,40 @@
+{
+  "name": "projects",
+  "version": "1.0.0",
+  "description": "a backend project",
+  "keywords": [
+    "chai",
+    "backend"
+  ],
+  "homepage": "https://github.com/raut-anuj/backend_project#readme",
+  "bugs": {
+    "url": "https://github.com/raut-anuj/backend_project/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raut-anuj/backend_project.git"
+  },
+  "license": "ISC",
+  "author": "Anuj Kumar",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11",
+    "prettier": "^3.7.4"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cloudinary": "^2.8.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.0.2",
+    "mongoose-aggregate-paginate-v2": "^1.1.4",
+    "multer": "^2.0.2"
+  }
+}
