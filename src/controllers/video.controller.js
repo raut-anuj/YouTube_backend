@@ -3,11 +3,11 @@ import { ApiError } from "../utils/ApiError.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import mongoose from "mongoose";
-import { Video } from "../models/video.model.js";
+import { Video } from "../models/video.models.js";
 import { log } from "console";
 import jwt from "jsonwebtoken";
 import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2";
-import { User } from "../models/user.model.js";
+import { User } from "../models/user.models.js";
 
 const UploadVideo = asyncHandler(async(req, res)=>{
     const videoFile = req.file
@@ -54,8 +54,10 @@ const UploadVideo = asyncHandler(async(req, res)=>{
 })
 
 const GetAllVideos = asyncHandler(async(req, res)=>{
-   const videos= await Video.find();
-    console.log(videos);
+    const videos= await Video.find({
+        owner: req.user._id
+    });
+    console.log("Logged in User:", req.user._id);
     
    if(videos.length == 0)
     throw new ApiError(400, "No videos found");
@@ -88,23 +90,21 @@ const GetSingleVideo = asyncHandler(async(req,res)=>{
     });
 })
 
-const UpdateVideo = asyncHandler(async(req,res)=>{
-    const { thumbnails, title, description }=req.body
-    if(
-        [ thumbnails, title, description ].some(field => !field || field.trim() === "")
-    )
+const UpdateVideodescription = asyncHandler(async(req,res)=>{
+    const { videoId } = req.params;
+    const {title}=req.body
+
+    if( [title].some(field => !field || field.trim() === "") )
     throw new ApiError(400, "All fields required");
 
-    const update = await Video.findByIdAndUpdate(req.params._id,
+    const update = await Video.findByIdAndUpdate(videoId,
         {
         $set:{
             title:title,
-            thumbnails:thumbnails,
-            description:description
         }
     },
         { new:true })  // updated document return kare
-        .select("-views -Owner -videoFile")
+        .select("-views -owner -videoFile")
 
     return res
     .status(200)
@@ -122,7 +122,7 @@ const DeleteVideo = asyncHandler(async(req,res)=>{
    if(!video)
         throw new ApiError(404, "Video is not present in DB")
 
-   if(video._id.toString() !== video.Owner.toString())
+   if(video._id.toString() !== video.owner.toString())
         throw new ApiError(403, "Only owner can delete this video")
 
     await video.deleteOne();
@@ -237,9 +237,9 @@ const getOwner = asyncHandler(async(req,res)=>{
         {
             $lookup:{
                 from:"users",
-                localField:"Owner",
+                localField:"owner",
                 foreignField:"_id",
-                as:"Owner",
+                as:"owner",
                pipeline:[
                     {
                         $project:{
@@ -256,14 +256,14 @@ const getOwner = asyncHandler(async(req,res)=>{
 
 return res
 .status(200)
-.json(new ApiResponse(200, video[0].Owner[0].username, "Result"))
+.json(new ApiResponse(200, video[0].owner[0].username, "Result"))
 })
 
 export{
     UploadVideo,
     GetAllVideos,
     GetSingleVideo,
-    UpdateVideo,
+    UpdateVideodescription,
     DeleteVideo,
     IncrementViews,
     isPublished,

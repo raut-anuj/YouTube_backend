@@ -45,7 +45,7 @@ app.use(cookieParser())
 
 import userRouter from "./routes/user.routes.js";
 import videoRouter from "./routes/video.routes.js";
-import subscription from "./routes/subscription.routes.js"
+// import subscription from "./routes/subscription.routes.js"
 
 //import routes 
 //export default router ( yha pr hm router kh name badal diye ha userRouter mh is liye hm default export use kiye th )
@@ -56,7 +56,7 @@ app.use("/api/v1/users",userRouter)
 
 app.use("/api/v1/videos",videoRouter);
 
-app.use("/api/v1/subscription",subscription);
+// app.use("/api/v1/subscription",subscription);
 
 ///api/v1/users is a structured API route where /api indicates an API, /v1 represents the version, and /users represents the user resource.
 

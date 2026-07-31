@@ -2,6 +2,53 @@
 
 A scalable backend application built using Node.js, Express.js, and MongoDB to support user authentication, video management, subscription handling, and cloud-based media storage.
 
+## API Screenshots
+
+### User Login
+
+Authenticates a user using JWT and returns access and refresh tokens.
+
+![User Login](./public/temp/User_Login.png)
+
+---
+
+### Video Upload
+
+Uploads a video to Cloudinary and stores the metadata in MongoDB.
+
+![Video Upload](./public/temp/Video_Upload.png)
+
+---
+
+### Get All Videos
+
+Fetches all videos uploaded by the authenticated user.
+
+![Get All Videos](./public/temp/All_Videos.png)
+
+---
+
+### Update Video Description
+
+Updates the description of a specific video using its unique video ID.
+
+![Update Video Description](./public/temp/Update_Video_Description.png)
+
+---
+
+### User Logout
+
+Logs out the authenticated user by clearing authentication tokens.
+
+![User Logout](./public/temp/User_Logout.png)
+
+---
+
+### Database Verification (MongoDB Compass)
+Screenshot confirming that uploaded video data is successfully persisted in MongoDB after a successful API call.
+   
+![MongoDB Compass Screenshot](./public/temp/MongoDB%20Compass.png)
+
 ## Overview
 
 This project focuses on building a backend system for a video platform using RESTful APIs. It includes user authentication, video upload and retrieval functionality, subscription management, database design, and media storage integration.

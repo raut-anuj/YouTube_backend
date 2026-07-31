@@ -30,9 +30,10 @@ const videoSchema=new Schema(
            type:Boolean, 
             default:true
         },
-        Owner:{ 
-            type:Schema.Types.ObjectId,
-            ref:"User"
+        owner:{ 
+            type: mongoose.Schema.Types.ObjectId,
+            ref:"User",
+            required: true
         }
     },
     {

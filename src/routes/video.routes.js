@@ -5,7 +5,7 @@ import{
         UploadVideo,
         GetAllVideos,
         GetSingleVideo,
-        UpdateVideo,
+        UpdateVideodescription,
         DeleteVideo,
         IncrementViews,
         isPublished,
@@ -17,9 +17,9 @@ const router = Router();
 
 router.route("/videoupload")
       .post(verifyJWT, upload.single("videoFile"), UploadVideo);
-router.route("/giveallvideos").get(GetAllVideos)
-router.route("/givesinglevideo").get(GetSingleVideo)
-router.route("/updatevideo").put(verifyJWT, UpdateVideo)
+router.route("/getallvideos").get(verifyJWT, GetAllVideos);
+router.route("/getsinglevideo").get(verifyJWT, GetSingleVideo)
+router.route("/updatevideodescription/:videoId").put(verifyJWT, UpdateVideodescription)
 router.route("/deletevideo").delete(verifyJWT, DeleteVideo)
 router.route("/increaseviews").patch(IncrementViews)
 router.route("/ispublished").put(verifyJWT, isPublished)
