@@ -10,7 +10,6 @@ import{
         IncrementViews,
         isPublished,
         SearchVideo,
-        Pagination_Sorting
 } from "../controllers/video.controller.js"; 
 
 const router = Router();
@@ -24,7 +23,5 @@ router.route("/deletevideo").delete(verifyJWT, DeleteVideo)
 router.route("/increaseviews").patch(IncrementViews)
 router.route("/ispublished").put(verifyJWT, isPublished)
 router.route("/searchvideo").get(SearchVideo)
-router.route("/paginationsorting").get(Pagination_Sorting)
-
 
 export default router;

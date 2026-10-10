@@ -46,9 +46,3 @@ router.route("/c/:username").get(verifyJWT, getUserChannelProfile)
 router.route("/history").get(verifyJWT, getWatchHistory)
 
 export default router
-
-
-// GET → data laane ke liye fron DB
-// POST → naya data banane ke liye
-// PUT / PATCH → update ke liye
-// DELETE → delete ke liye 
